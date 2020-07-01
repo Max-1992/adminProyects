@@ -1,10 +1,27 @@
 // Native React
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 // React Router
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+// Require Context
+import AlertContext from '../../../context/alert/alertContext';
+import AuthContext from '../../../context/auth/authContext';
+
+const Login = ({ history }) => {
+
+     // Declare State access your Context
+     const authContext = useContext(AuthContext);
+
+     // Subtract State Properties
+     const { auth, msg, login } = authContext;
+ 
+     // Declare State access your Context
+     const alertContext = useContext(AlertContext);
+ 
+     // Subtract State Properties
+     const { alert, showAlert, hideAlert } = alertContext;
+ 
 
     // Create State
     const initilaStateUser = {
@@ -15,6 +32,16 @@ const Login = () => {
 
     // Subtract State Properties
     const { email, password } = user;
+
+    // UseEffect
+    useEffect(() => {
+
+        if(auth) history.push('/projects');
+
+        if(msg) showAlert(msg.msg, msg.category);
+        
+        // eslint-disable-next-line
+    }, [msg, auth, history])
 
     // HandleChange
     const handleChange = e => {
@@ -32,8 +59,35 @@ const Login = () => {
         e.preventDefault();
 
         // Fields Validate
+        if( !email ) {
+            let message = {
+                msg: `El email es requerido.`,
+                category: `alerta-error`
+            };
+
+            return showAlert(message.msg, message.category);
+        };
+
+        if( !password ) {
+            let message = {
+                msg: `El password es requerido.`,
+                category: `alerta-error`
+            };
+
+            return showAlert(message.msg, message.category);
+        };
+
+         // Clean alert.
+         hideAlert();
+
+         // Create User
+        const user = {
+            email,
+            password
+        };
 
         // Run login
+        login(user);
 
     };
 
@@ -41,6 +95,8 @@ const Login = () => {
         <div className="form-usuario">
             <div className="contenedor-form sombra-dark">
                 <h1> Iniciar Sesión </h1>
+
+                { alert ? (<div className={`alerta ${alert.category}`}> { alert.msg } </div>) : null }
 
                 <form onSubmit={handleSubmit}>
                     <div className="campo-form">

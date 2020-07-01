@@ -88,6 +88,10 @@ a {
   background-color: transparent;
 }
 
+.btn-proyect {
+  color: #fff;
+}
+
 .m-b {
   margin-bottom: 16px;
 }
@@ -131,12 +135,23 @@ aside  {
 .listado-proyectos li {
   margin-bottom: 2rem;
 }
+
 .listado-proyectos li a {
   font-size: 1.4rem;
   color: var(--gris2);
   line-height: 1.5;
   font-weight: 300;
 }
+
+.item-proyectos {
+  display: flex;
+  min-height: 24px;
+  margin: 8px 0;
+  padding-left: 8px;
+  background-color: rgb(8, 125, 221);
+  cursor: pointer;
+}
+
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -193,6 +208,11 @@ aside  {
 .listado-tareas {
   max-width: 600px;
   margin: 0 auto;
+}
+
+.btn-deleted {
+  background-color: rgb(251, 17, 17);
+  color: #fff;
 }
 
 .tarea {
@@ -329,4 +349,25 @@ aside  {
   margin-top: 2rem;
   display: block;
   opacity: .7;
+}
+
+.alerta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 30px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.alerta-error {
+  padding: 8px;
+  background-color: red;
+  color: white;
+}
+
+.alerta-ok {
+  background-color: rgb(109,211,109);
+  color: white;
 }
